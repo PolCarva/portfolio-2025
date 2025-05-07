@@ -11,6 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        gray: "#404040",
         white: "#fafafa",
         black: "#111111",
         border: "hsl(var(--border))",
