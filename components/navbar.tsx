@@ -7,15 +7,15 @@ export default function Navbar() {
         pablo carvalho.
       </Link>
       <div className="flex items-center space-x-12">
-        <Link href="#projects" className="text-sm uppercase tracking-widest hover:opacity-70 transition-opacity">
+        <Link href="#projects" className="text-sm tracking-widest hover:opacity-70 transition-opacity">
           projects
         </Link>
-        <Link href="#about" className="text-sm uppercase tracking-widest hover:opacity-70 transition-opacity">
+        <Link href="#about" className="text-sm tracking-widest hover:opacity-70 transition-opacity">
           about
         </Link>
         <Link
           href="#contact"
-          className="text-sm uppercase tracking-widest border border-white rounded-full px-5 py-2 hover:bg-white hover:text-black transition-colors"
+          className="text-sm tracking-widest border border-white rounded-full px-5 py-2 hover:bg-white hover:text-black transition-colors"
         >
           working @ gopersonal
         </Link>

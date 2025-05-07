@@ -10,7 +10,7 @@ export default function About() {
         <div className="text-sm">02/</div>
         <h2 className="text-center text-xl tracking-widest">about</h2>
         <div className="text-sm">
-          <Link href="mailto:email@example.com" className="hover:underline">
+          <Link href="mailto:pablocarvalhogimenez@gmail.com" className="hover:underline">
             email
           </Link>{" "}
           /
