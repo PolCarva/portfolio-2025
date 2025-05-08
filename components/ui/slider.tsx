@@ -17,7 +17,7 @@ export default function Slider({ images }: SliderProps) {
 
   return (
     <div ref={container} className="relative bg-black">
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-fit overflow-hidden">
         <Slide 
           direction="left" 
           progress={scrollYProgress} 

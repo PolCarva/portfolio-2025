@@ -41,19 +41,7 @@ export default function About() {
         </div>
       </div>
 
-      <div className="flex justify-end mt-16">
-        <Link
-          href="#projects"
-          className="rounded-full border border-white w-32 h-32 flex items-center justify-center hover:bg-white hover:text-black transition-colors"
-        >
-          <div className="text-center text-sm">
-            learn
-            <br />
-            more
-          </div>
-        </Link>
-      </div>
-
+   
       <Slider images={[
         "/placeholder.svg?height=600&width=800",
         "/placeholder.svg?height=600&width=800",
