@@ -49,7 +49,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        sans: ["Gabarito", "var(--font-sans)", "system-ui", "sans-serif"],
+        gabarito: ["Gabarito", "sans-serif"],
       },
     },
   },

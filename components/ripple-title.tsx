@@ -1,18 +1,25 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useScreenSize } from '@/hooks/useScreenSize'
 
-const svgText = encodeURIComponent(`
-  <svg width="100vw" height="100vh" xmlns="http://www.w3.org/2000/svg">
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-      font-size="12vw" font-family="Gabarito, sans-serif" font-weight="bold" fill="#fafafa">
-      Pablo Carvalho
-    </text>
-  </svg>
-`)
-
-export default function RippleTitle() {
+export default function RippleTitle({ title }: { title: string }) {
   const ref = useRef<HTMLDivElement>(null)
+  const { width: screenSize } = useScreenSize()
+  const [svgBackground, setSvgBackground] = useState<string>('')
+
+  useEffect(() => {
+    // Generate SVG text on the client side to avoid hydration mismatch
+    const svgText = encodeURIComponent(`
+      <svg width="100vw" height="100vh" xmlns="http://www.w3.org/2000/svg">
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+          font-size="${title.length < 10 && screenSize < 768 ? '20vw' : '12vw'}" font-family="Gabarito, sans-serif" font-weight="bold" fill="#fafafa">
+          ${title}
+        </text>
+      </svg>
+    `)
+    setSvgBackground(`url("data:image/svg+xml,${svgText}")`)
+  }, [title, screenSize])
 
   useEffect(() => {
     if (typeof window === 'undefined' || !ref.current) return
@@ -64,11 +71,11 @@ export default function RippleTitle() {
       ref={ref}
       className="relative w-full h-screen flex items-center justify-center"
       style={{
-        backgroundImage: `url("data:image/svg+xml,${svgText}")`,
+        backgroundImage: svgBackground,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
       }}
     />
   )
-} 
+}

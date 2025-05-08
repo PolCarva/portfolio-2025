@@ -4,7 +4,8 @@ import RippleTitle from "./ripple-title"
 export default function Hero() {
   return (
     <section className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
-      <RippleTitle />
+      <RippleTitle title="pablo carvalho" />
+      
       <h1 className="sr-only">
         pablo carvalho | full stack developer & multimedia designer
       </h1>
