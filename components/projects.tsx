@@ -35,7 +35,7 @@ function HorizontalGallery() {
     <section className="w-full flex flex-col items-center justify-center py-16 overflow-x-hidden">
       <div className="h-[20vh]" />
       <div className="w-full overflow-x-hidden">
-        <div ref={gallery} className="flex flex-col gap-8 w-full max-w-7xl overflow-x-visible">
+        <div ref={gallery} className="flex flex-col gap-2 md:gap-8 w-full max-w-7xl overflow-x-visible">
           <Row images={images} x={x1} />
           <Row images={images} x={x2} reverse />
           <Row images={images} x={x3} />
@@ -48,15 +48,15 @@ function HorizontalGallery() {
 
 function Row({ images, x, reverse = false }: { images: string[], x: any, reverse?: boolean }) {
   const infiniteImages = [...images, ...images, ...images, ...images]
-  const animatedX = reverse ? useTransform(x, v => -v) : x
+  const animatedX = reverse ? useTransform(x, (v: number) => -v) : x
 
   return (
     <motion.div
-      className={`flex flex-row gap-8 w-fit`}
+      className={`flex flex-row gap-2 md:gap-8 w-fit`}
       style={{ x: animatedX }}
     >
       {infiniteImages.map((src, i) => (
-        <div key={i} className="relative w-96 h-64 rounded-xl overflow-hidden bg-neutral-800 flex-shrink-0">
+        <div key={i} className="relative w-[30svw] aspect-video md:w-96 md:h-64 rounded-xl overflow-hidden bg-neutral-800 flex-shrink-0">
           <Image
             src={src}
             alt="project image"

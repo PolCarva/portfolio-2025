@@ -21,19 +21,19 @@ export default function Slider({ images }: SliderProps) {
         <Slide 
           direction="left" 
           progress={scrollYProgress} 
-          left="0%" 
+          left="-100%" 
           src={images[0]} 
         />
         <Slide 
           direction="right" 
           progress={scrollYProgress} 
-          left="-50%" 
+          left="-110%" 
           src={images[1]} 
         />
         <Slide 
           direction="left" 
           progress={scrollYProgress} 
-          left="-15%" 
+          left="-115%" 
           src={images[2]} 
         />
       </div>

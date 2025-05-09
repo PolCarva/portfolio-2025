@@ -1,25 +1,37 @@
-import Link from "next/link"
+'use client'
+import { useState, useEffect } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import Nav from './Nav' // Este importará el Nav.tsx que ya creamos
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
+  const [isActive, setIsActive] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    // Cierra el menú si cambia la ruta
+    if (isActive) setIsActive(false)
+  }, [pathname])
+
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center">
-      <Link href="/" className="text-2xl font-light tracking-wider">
-        pablo carvalho.
-      </Link>
-      <div className="flex items-center space-x-12">
-        <Link href="#projects" className="text-sm tracking-widest hover:opacity-70 transition-opacity">
-          projects
-        </Link>
-        <Link href="#about" className="text-sm tracking-widest hover:opacity-70 transition-opacity">
-          about
-        </Link>
-        <Link
-          href="#contact"
-          className="text-sm tracking-widest border border-white rounded-full px-5 py-2 hover:bg-white hover:text-black transition-colors"
+    <>
+      {/* Contenedor del Botón Burger */}
+      <div className="fixed top-0 right-0 z-50 p-4">
+        <button
+          onClick={() => setIsActive(!isActive)}
+          className="w-12 h-12 rounded-full bg-gray flex items-center justify-center cursor-pointer relative outline-none border-none shadow-md"
+          aria-label="Toggle menu"
         >
-          working @ gopersonal
-        </Link>
+          {/* Ícono Burger/Cruz - dos líneas que se transforman */}
+          <div className={`w-1/2 h-[2px] bg-white absolute transform transition-all duration-300 ease-in-out ${isActive ? 'rotate-45' : '-translate-y-1'}`} />
+          <div className={`w-1/2 h-[2px] bg-white absolute transform transition-all duration-300 ease-in-out ${isActive ? '-rotate-45' : 'translate-y-1'}`} />
+        </button>
       </div>
-    </nav>
+
+      {/* Menú Lateral (Nav) */}
+      <AnimatePresence mode="wait">
+        {isActive && <Nav onClose={() => setIsActive(false)} />}
+      </AnimatePresence>
+    </>
   )
-}
+} 
