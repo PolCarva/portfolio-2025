@@ -5,8 +5,8 @@ import ProfileImage from "./ui/profile-image";
 
 export default function About() {
   return (
-    <section id="about" className="min-h-screen py-16 px-8 relative">
-      <div className="flex flex-col md:flex-row justify-between md:items-center py-4">
+    <section id="about" className="min-h-screen py-16 relative">
+      <div className="flex flex-col md:flex-row justify-between md:items-center px-8 py-4">
         <div className="text-sm self-start">02/</div>
         <h2 className="text-center text-xl tracking-widest">about</h2>
         <div className="text-sm text-center md:text-right">
@@ -31,7 +31,7 @@ export default function About() {
         </div>
       </div>
 
-      <div className="flex flex-col items-left mt-16">
+      <div className="flex flex-col items-left mt-16 px-8 ">
         <div className="max-w-xl mb-12">
           <Paragraph paragraph="hello, my name is pablo carvalho, i'm a multimedia designer who creates products, websites, and brands." />
         </div>
@@ -42,6 +42,12 @@ export default function About() {
             alt="Profile photo"
           />
         </div>
+        <Link
+          href="/about"
+          className="px-8 py-4 md:px-12 my-10 md:py-6 rounded-full max-w-[calc(100vw-2rem)] md:max-w-md mx-auto md:mx-0 md:ml-auto w-full border text-center border-white hover:bg-white hover:text-black transition-colors text-xl font-bold tracking-wider"
+        >
+          get to know me
+        </Link>
       </div>
 
       <Slider
@@ -51,6 +57,7 @@ export default function About() {
           "/placeholder.svg?height=600&width=800",
         ]}
       />
+        
     </section>
   );
 }

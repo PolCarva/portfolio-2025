@@ -17,7 +17,7 @@ export default function Contact() {
     <motion.section 
       id="contact" 
       ref={sectionRef}
-      className="min-h-screen py-16 px-8 flex flex-col justify-center relative border rounded-2xl border-white m-8"
+      className="md:min-h-screen py-16 px-8 flex flex-col justify-center relative border rounded-2xl border-white m-8"
       style={{ 
         scale,
         originX: 0.5,
