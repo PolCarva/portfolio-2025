@@ -3,8 +3,7 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Gabarito } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
-import NoiseTexture from "@/components/noise-texture"
-
+import Navbar from "@/components/navbar"
 const gabarito = Gabarito({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -21,7 +20,7 @@ export default function RootLayout({
     <html lang="es" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${gabarito.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <NoiseTexture />
+          <Navbar />
             {children}
         </ThemeProvider>
       </body>

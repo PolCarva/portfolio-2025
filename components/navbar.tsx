@@ -18,6 +18,7 @@ export default function Navbar() {
       {/* Contenedor del Botón Burger */}
       <div className="fixed top-0 right-0 z-50 p-4">
         <button
+          type="button"
           onClick={() => setIsActive(!isActive)}
           className="w-12 h-12 rounded-full bg-gray flex items-center justify-center cursor-pointer relative outline-none border-none shadow-md"
           aria-label="Toggle menu"

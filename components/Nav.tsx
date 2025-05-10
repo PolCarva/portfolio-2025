@@ -8,20 +8,20 @@ import Curve from './Curve';
 
 const navItems = [
     {
-        title: "Home",
+        title: "home",
         href: "/",
     },
     {
-        title: "Work",
-        href: "/work",
+        title: "work",
+        href: "#work",
     },
     {
-        title: "About",
-        href: "/about",
+        title: "about",
+        href: "#about",
     },
     {
-        title: "Contact",
-        href: "/contact",
+        title: "contact",
+        href: "#contact",
     },
 ]
 
@@ -47,8 +47,8 @@ export default function Nav({onClose}: NavProps) {
                     onMouseLeave={() => {setSelectedIndicator(pathname)}}
                     className="flex flex-col text-5xl gap-3 mt-20"
                 >
-                    <div className="text-gray-500 border-b border-gray-500 uppercase text-xs mb-10">
-                        <p>Navigation</p>
+                    <div className="text-gray border-b border-gray uppercase text-xs mb-10">
+                        <p>navigation</p>
                     </div>
                     {
                         navItems.map( (data, index) => {
