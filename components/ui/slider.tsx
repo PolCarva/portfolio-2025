@@ -27,7 +27,7 @@ export default function Slider({ images }: SliderProps) {
         <Slide 
           direction="right" 
           progress={scrollYProgress} 
-          left="-110%" 
+          left="-70%" 
           src={images[1]} 
         />
         <Slide 

@@ -1,16 +1,19 @@
-import Link from "next/link"
-import Paragraph from "./ui/character"
-import Slider from "./ui/slider"
-import ProfileImage from "./ui/profile-image"
+import Link from "next/link";
+import Paragraph from "./ui/character";
+import Slider from "./ui/slider";
+import ProfileImage from "./ui/profile-image";
 
 export default function About() {
   return (
     <section id="about" className="min-h-screen py-16 px-8 relative">
-      <div className="flex justify-between items-center py-4">
-        <div className="text-sm">02/</div>
+      <div className="flex flex-col md:flex-row justify-between md:items-center py-4">
+        <div className="text-sm self-start">02/</div>
         <h2 className="text-center text-xl tracking-widest">about</h2>
-        <div className="text-sm">
-          <Link href="mailto:pablocarvalhogimenez@gmail.com" className="hover:underline">
+        <div className="text-sm text-center md:text-right">
+          <Link
+            href="mailto:pablocarvalhogimenez@gmail.com"
+            className="hover:underline"
+          >
             email
           </Link>{" "}
           /
@@ -30,23 +33,24 @@ export default function About() {
 
       <div className="flex flex-col items-left mt-16">
         <div className="max-w-xl mb-12">
-          <Paragraph paragraph="hello, my name is pablo carvalho, i'm a multimedia designer who creates products, websites, and brands."/>
+          <Paragraph paragraph="hello, my name is pablo carvalho, i'm a multimedia designer who creates products, websites, and brands." />
         </div>
 
         <div className="relative w-full max-w-2xl mx-auto">
-          <ProfileImage 
-            src="/placeholder.svg?height=600&width=800" 
-            alt="Profile photo" 
+          <ProfileImage
+            src="/placeholder.svg?height=600&width=800"
+            alt="Profile photo"
           />
         </div>
       </div>
 
-   
-      <Slider images={[
-        "/placeholder.svg?height=600&width=800",
-        "/placeholder.svg?height=600&width=800",
-        "/placeholder.svg?height=600&width=800",
-      ]} />
+      <Slider
+        images={[
+          "/placeholder.svg?height=600&width=800",
+          "/placeholder.svg?height=600&width=800",
+          "/placeholder.svg?height=600&width=800",
+        ]}
+      />
     </section>
-  )
+  );
 }
