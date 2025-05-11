@@ -13,15 +13,15 @@ const navItems = [
     },
     {
         title: "work",
-        href: "#work",
+        href: "/work",
     },
     {
         title: "about",
-        href: "#about",
+        href: "/about",
     },
     {
         title: "contact",
-        href: "#contact",
+        href: "/contact",
     },
 ]
 
@@ -40,14 +40,14 @@ export default function Nav({onClose}: NavProps) {
             initial="initial" 
             animate="enter" 
             exit="exit" 
-            className="fixed top-0 right-0 h-screen w-full max-w-[350px] bg-[#fafafa] z-40 shadow-2xl"
+            className="fixed top-0 right-0 h-screen w-full sm:max-w-[350px] bg-[#fafafa] z-40 shadow-2xl"
         >
            <div className="box-border h-full p-[100px] flex flex-col justify-between">
                 <div 
                     onMouseLeave={() => {setSelectedIndicator(pathname)}}
                     className="flex flex-col text-5xl gap-3 mt-20"
                 >
-                    <div className="text-gray border-b border-gray uppercase text-xs mb-10">
+                    <div className="text-gray border-b border-gray text-lg mb-10">
                         <p>navigation</p>
                     </div>
                     {

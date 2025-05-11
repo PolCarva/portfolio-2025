@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import Nav from './Nav' // Este importará el Nav.tsx que ya creamos
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 export default function Navbar() {
   const [isActive, setIsActive] = useState(false)
@@ -15,8 +16,14 @@ export default function Navbar() {
 
   return (
     <>
+      <div className='fixed top-3 left-0 p-8 w-fit h-fit z-50'>
+        <Link href="/" className={`${isActive ? 'text-black' : 'text-white'} sm:text-white transition-colors duration-350 text-xl md:text-4xl font-medium`}>
+          pablo carvalho.
+        </Link>
+      </div>
+
       {/* Contenedor del Botón Burger */}
-      <div className="fixed top-0 right-0 z-50 p-4">
+      <div className="fixed top-0 right-0 z-50 p-8">
         <button
           type="button"
           onClick={() => setIsActive(!isActive)}
