@@ -2,11 +2,26 @@
 import React, { useEffect, useRef, useState } from 'react'
 // import Image from 'next/image' // Still used for placeholder array
 import { useTransform, useScroll, motion, useVelocity, type MotionValue } from 'framer-motion'
-import { Canvas, extend, useFrame } from '@react-three/fiber'
-import { shaderMaterial } from '@react-three/drei'
+import { Canvas, extend, useFrame, type ShaderMaterialProps } from '@react-three/fiber'
+import { shaderMaterial, useTexture } from '@react-three/drei'
 import * as THREE from 'three' // Import THREE namespace
 
-// const images = Array(12).fill('/placeholder.svg') // Ya no se usa para generar items
+// Array de imágenes (placeholders por ahora)
+const images_array = [
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+"/placeholder.svg?height=600&width=800",
+
+];
 
 // Shader Definitions
 const vertexShader = `
@@ -26,18 +41,20 @@ void main() {
 
 const fragmentShader = `
 varying vec2 vUv;
-// uniform sampler2D uTexture; // No necesitamos uTexture para el color rojo
-uniform float uAlpha; // uAlpha se usará para la opacidad del color rojo
+uniform sampler2D uTexture; // Reactivar uTexture
+uniform float uAlpha;       // Reactivar uAlpha
 
 void main() {
-    gl_FragColor = vec4(1.0, 0.0, 0.0, uAlpha); // Rojo sólido con opacidad controlada por uAlpha
+    vec4 texColor = texture2D(uTexture, vUv);
+    // Aplicar el alpha del uniform al alpha de la textura
+    gl_FragColor = vec4(texColor.rgb, texColor.a * uAlpha);
 }
 `
 
 const DistortionMaterial = shaderMaterial(
   {
-    uTexture: null, // Inicializar uTexture como null ya que no la usamos para el rojo
-    uAlpha: 1.0,    // uAlpha por defecto a 1 para opacidad total
+    uTexture: new THREE.Texture(), // Inicializar uTexture (puede ser null o una textura default)
+    uAlpha: 1.0,                   // uAlpha por defecto a 1 para opacidad total
     uStrength: 0.0,
     uDirection: new THREE.Vector2(0, 0),
   },
@@ -47,7 +64,7 @@ const DistortionMaterial = shaderMaterial(
 
 extend({ DistortionMaterial })
 
-// TypeScript type for the extended material
+// TypeScript type for the extended material (temporalmente any para desbloquear)
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -70,9 +87,9 @@ function HorizontalGallery() {
   })
 
   const { width } = dimension
-  const x1 = useTransform(scrollYProgress, [0, 1], [-width * 0.5, width * 0.1]) // Adjusted intensity
-  const x2 = useTransform(scrollYProgress, [0, 1], [0, width * 0.3]) // Adjusted intensity
-  const x3 = useTransform(scrollYProgress, [0, 1], [-width * 0.6, 0]) // Adjusted intensity
+  const x1 = useTransform(scrollYProgress, [0, 1], [-width * 0.5, width * 0.1])
+  const x2 = useTransform(scrollYProgress, [0, 1], [0, width * 0.3])
+  const x3 = useTransform(scrollYProgress, [0, 1], [-width * 0.6, 0])
 
   useEffect(() => {
     const resize = () => setDimension({ width: window.innerWidth, height: window.innerHeight })
@@ -80,67 +97,72 @@ function HorizontalGallery() {
     resize()
     return () => window.removeEventListener("resize", resize)
   }, [])
+  
+  // Distribuir imágenes a las filas
+  const row1Images = images_array.slice(0, 5);
+  const row2Images = images_array.slice(4, 9);
+  const row3Images = images_array.slice(2, 7);
 
   return (
-    <section className="w-full flex flex-col items-center justify-center py-16 overflow-x-hidden bg-black"> {/* Added bg-black for better visibility */}
-      <div className="h-[10vh]" /> {/* Reduced vertical spacing */}
+    <section className="w-full flex flex-col items-center justify-center py-16 overflow-x-hidden bg-black">
+      <div className="h-[10vh]" />
       <div className="w-full overflow-x-hidden">
-        <div ref={gallery} className="flex flex-col gap-4 md:gap-6 w-full max-w-screen-2xl"> {/* Increased max-width and adjusted gap */}
-          <Row count={8} x={x1} />
-          <Row count={8} x={x2} reverse />
-          <Row count={8} x={x3} />
+        <div ref={gallery} className="flex flex-col gap-4 md:gap-6 w-full max-w-screen-2xl">
+          <Row images={row1Images} x={x1} />
+          <Row images={row2Images} x={x2} reverse />
+          <Row images={row3Images} x={x3} />
         </div>
       </div>
-      <div className="h-[10vh]" /> {/* Reduced vertical spacing */}
+      <div className="h-[10vh]" />
     </section>
   )
 }
 
 interface RowProps {
-  // images: string[]; // Ya no se usa
+  images: string[]; // Cambiado de count a images
   x: MotionValue<number>;
-  count: number; // Para determinar cuántos cuadrados renderizar
   reverse?: boolean;
 }
 
-function Row({ x, count, reverse = false }: RowProps) {
-  const itemsToRender = Array.from({ length: count });
+function Row({ images, x, reverse = false }: RowProps) {
   const rowMotionX = reverse ? useTransform(x, (v: number) => -v) : x
 
   return (
     <motion.div
-      className="flex flex-row gap-4 md:gap-6 w-fit" // Matched gap with parent
+      className="flex flex-row gap-4 md:gap-6 w-fit"
       style={{ x: rowMotionX }}
     >
-      {itemsToRender.map((_, i) => (
-        <div 
-          key={`distort-item-${i}`} // More unique key
-          className="relative w-[40svw] aspect-[4/3] md:w-[380px] md:h-[285px] rounded-lg overflow-hidden bg-neutral-900 flex-shrink-0" // Adjusted aspect ratio and size
-        >
-          <DistortingImage rowMotionX={rowMotionX} itemKey={`canvas-${i}`} /> {/* Pasar una key única para el Canvas */}
-        </div>
-      ))}
+      {images.map((src, i) => {
+        const uniqueKey = `distort-item-${reverse ? 'rev' : 'fwd'}-${i}-${src.split('/').pop()}`;
+        return (
+          <div 
+            key={uniqueKey} // Key más única
+            className="relative w-[40svw] aspect-[4/3] md:w-[380px] md:h-[285px] rounded-lg overflow-hidden bg-neutral-900 flex-shrink-0"
+          >
+            <DistortingImage src={src} rowMotionX={rowMotionX} itemKey={`canvas-${uniqueKey}`} /> 
+          </div>
+        );
+      })}
     </motion.div>
   )
 }
 
 interface DistortingImageProps {
-  // src: string; // src eliminado
+  src: string; // src añadido
   rowMotionX: MotionValue<number>;
-  itemKey: string; // Key para el Canvas
+  itemKey: string;
 }
 
-// This new component will contain the R3F hooks and mesh logic
-function MeshWithDistortion({ rowMotionX }: Omit<DistortingImageProps, 'itemKey'>) {
+function MeshWithDistortion({ src, rowMotionX }: Omit<DistortingImageProps, 'itemKey'>) {
   const materialRef = useRef<InstanceType<typeof DistortionMaterial>>(null)
-  // const texture = useTexture(src) // Textura no se usa para la prueba de canvas rojo
+  const texture = useTexture(src); // Cargar la textura usando el src
+  // Configurar texture wrapping si es necesario (opcional)
   // texture.wrapS = THREE.RepeatWrapping; 
   // texture.wrapT = THREE.RepeatWrapping;
-  const velocity = useVelocity(rowMotionX) // Reactivado para la lógica de scroll
+  const velocity = useVelocity(rowMotionX)
 
   useFrame(() => { 
     if (materialRef.current) { 
-      // --- Lógica de scroll reactivada ---
       const currentVelocity = velocity.get()
       let strength = Math.abs(currentVelocity) / 500 
       strength = Math.min(strength, 0.5) 
@@ -161,31 +183,32 @@ function MeshWithDistortion({ rowMotionX }: Omit<DistortingImageProps, 'itemKey'
         0.15 
       );
       materialRef.current.uniforms.uDirection.value.y = 0.0; 
-      materialRef.current.uniforms.uAlpha.value = 1.0; // Asegurar opacidad del rojo
-      // --- Fin lógica de scroll ---
+      
+      // Asignar la textura y el alpha al material en cada frame
+      materialRef.current.uniforms.uTexture.value = texture;
+      materialRef.current.uniforms.uAlpha.value = 1.0; // Mantener alpha en 1.0 por ahora
     }
   })
 
   return (
     <mesh>
-      {/* 2. Añadir Segmentos a la Geometría del Plano */}
-      <planeGeometry args={[1.33 * 1.35, 1 * 1.35, 32, 32]} /> 
+      <planeGeometry args={[1.33 * 1.35, 1 * 1.35, 32, 32]} />
       <distortionMaterial
+        as any // Mantener aserción temporal
         ref={materialRef}
-        // uTexture={texture} // TEMPORALMENTE COMENTADO
-        toneMapped={false} 
-        transparent={true} 
-        // uAlpha={1.0} // Se puede pasar si el shader (rojo) lo usara explícitamente
+        // uTexture={texture} // Se maneja en useFrame
+        toneMapped={false}
+        transparent={true}
+        // uAlpha={1.0} // Se maneja en useFrame
       />
     </mesh>
   )
 }
 
-function DistortingImage({ rowMotionX, itemKey }: DistortingImageProps) {
+function DistortingImage({ src, rowMotionX, itemKey }: DistortingImageProps) {
   return (
-    // Canvas now wraps the component that uses R3F hooks
-    <Canvas key={itemKey} dpr={[1, 1.5]} camera={{ fov: 30, position: [0, 0, 2.8] }}> {/* Adjusted fov and camera Z */}
-      <MeshWithDistortion rowMotionX={rowMotionX} />
+    <Canvas key={itemKey} dpr={[1, 1.5]} camera={{ fov: 30, position: [0, 0, 2.8] }}>
+      <MeshWithDistortion src={src} rowMotionX={rowMotionX} />
     </Canvas>
   )
 }
