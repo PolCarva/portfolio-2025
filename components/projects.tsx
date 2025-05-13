@@ -6,6 +6,7 @@ import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { shaderMaterial, useTexture } from '@react-three/drei'
 import * as THREE from 'three' // Import THREE namespace
 import Link from 'next/link'
+import Paragraph from './ui/character'
 
 // Array de imágenes (placeholders por ahora)
 const images_array = [
@@ -86,9 +87,12 @@ export default function Projects() {
           </Link>
         </div>
       </div>
+      <div className="max-w-xl ml-auto mb-12 mt-16">
+        <Paragraph className="text-left ml-auto" paragraph="here are some of my projects, showcasing my skills in web development, product design, and brand identity." />
+      </div>
       <HorizontalGallery />
       <div className="px-8 py-4">
-      <Link
+        <Link
           href="/projects"
           className="px-8 py-4 md:px-12 my-10 md:py-6 rounded-full max-w-[calc(100vw-2rem)] md:max-w-md mx-auto md:mx-0 md:ml-auto w-full border text-center border-white hover:bg-white hover:text-black transition-colors text-xl font-bold tracking-wider"
         >
