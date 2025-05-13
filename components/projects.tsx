@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 // import Image from 'next/image' // Still used for placeholder array
 import { useTransform, useScroll, motion, useVelocity, type MotionValue } from 'framer-motion'
-import { Canvas, extend, useFrame, type ShaderMaterialProps } from '@react-three/fiber'
+import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { shaderMaterial, useTexture } from '@react-three/drei'
 import * as THREE from 'three' // Import THREE namespace
 
@@ -87,7 +87,7 @@ function HorizontalGallery() {
   })
 
   const { width } = dimension
-  const x1 = useTransform(scrollYProgress, [0, 1], [-width * 0.5, width * 0.1])
+  const x1 = useTransform(scrollYProgress, [0, 1], [-width * 0.4, 0])
   const x2 = useTransform(scrollYProgress, [0, 1], [0, width * 0.3])
   const x3 = useTransform(scrollYProgress, [0, 1], [-width * 0.6, 0])
 
@@ -99,15 +99,15 @@ function HorizontalGallery() {
   }, [])
   
   // Distribuir imágenes a las filas
-  const row1Images = images_array.slice(0, 5);
-  const row2Images = images_array.slice(4, 9);
-  const row3Images = images_array.slice(2, 7);
+  const row1Images = images_array.slice(0, 4);
+  const row2Images = images_array.slice(4, 8);
+  const row3Images = images_array.slice(8, 12);
 
   return (
-    <section className="w-full flex flex-col items-center justify-center py-16 overflow-x-hidden bg-black">
+    <section className="w-full flex flex-col items-center justify-center py-16 bg-black overflow-x-hidden">
       <div className="h-[10vh]" />
-      <div className="w-full overflow-x-hidden">
-        <div ref={gallery} className="flex flex-col gap-4 md:gap-6 w-full max-w-screen-2xl">
+      <div className="w-full px-2 md:px-8">
+        <div ref={gallery} className="flex flex-col gap-4 md:gap-12 w-full max-w-screen-2xl mx-auto">
           <Row images={row1Images} x={x1} />
           <Row images={row2Images} x={x2} reverse />
           <Row images={row3Images} x={x3} />
@@ -129,15 +129,15 @@ function Row({ images, x, reverse = false }: RowProps) {
 
   return (
     <motion.div
-      className="flex flex-row gap-4 md:gap-6 w-fit"
+      className="flex flex-row gap-0 md:gap-6 w-fit"
       style={{ x: rowMotionX }}
     >
       {images.map((src, i) => {
         const uniqueKey = `distort-item-${reverse ? 'rev' : 'fwd'}-${i}-${src.split('/').pop()}`;
         return (
           <div 
-            key={uniqueKey} // Key más única
-            className="relative w-[40svw] aspect-[4/3] md:w-[380px] md:h-[285px] rounded-lg overflow-hidden bg-neutral-900 flex-shrink-0"
+            key={uniqueKey}
+            className="relative w-[calc(40vw-1rem)] md:w-[calc(33.333vw-1rem)] overflow-visible aspect-[4/3] md:w-[calc(33.333vw-2rem)] md:h-[calc((33.333vw-2rem)*0.75)] lg:w-[calc(33.333vw-3rem)] lg:h-[calc((33.333vw-3rem)*0.75)] rounded-lg bg-transparent flex-shrink-0"
           >
             <DistortingImage src={src} rowMotionX={rowMotionX} itemKey={`canvas-${uniqueKey}`} /> 
           </div>
@@ -164,25 +164,27 @@ function MeshWithDistortion({ src, rowMotionX }: Omit<DistortingImageProps, 'ite
   useFrame(() => { 
     if (materialRef.current) { 
       const currentVelocity = velocity.get()
-      let strength = Math.abs(currentVelocity) / 500 
-      strength = Math.min(strength, 0.5) 
+      // Reducir la fuerza de la distorsión y suavizar el efecto
+      let strength = Math.abs(currentVelocity) / 1000 // Reducido de 500 a 1000
+      strength = Math.min(strength, 0.2) // Reducido el máximo de 0.5 a 0.2
 
       let directionX = 0
-      const velocityThreshold = 1 
-      if (currentVelocity > velocityThreshold) directionX = 1
-      else if (currentVelocity < -velocityThreshold) directionX = -1
+      const velocityThreshold = 0.5 // Umbral más bajo para una respuesta más suave
+      if (currentVelocity > velocityThreshold) directionX = 0.5 // Reducir la intensidad de la dirección
+      else if (currentVelocity < -velocityThreshold) directionX = -0.5 // Reducir la intensidad de la dirección
       
+      // Hacer la transición más suave
       materialRef.current.uniforms.uStrength.value = THREE.MathUtils.lerp(
         materialRef.current.uniforms.uStrength.value,
         strength,
-        0.15 
+        0.08 // Reducido de 0.15 para una transición más suave
       );
       materialRef.current.uniforms.uDirection.value.x = THREE.MathUtils.lerp(
         materialRef.current.uniforms.uDirection.value.x,
         directionX,
-        0.15 
+        0.08 // Reducido de 0.15 para una transición más suave
       );
-      materialRef.current.uniforms.uDirection.value.y = 0.0; 
+      materialRef.current.uniforms.uDirection.value.y = 0.0;
       
       // Asignar la textura y el alpha al material en cada frame
       materialRef.current.uniforms.uTexture.value = texture;
@@ -192,14 +194,11 @@ function MeshWithDistortion({ src, rowMotionX }: Omit<DistortingImageProps, 'ite
 
   return (
     <mesh>
-      <planeGeometry args={[1.33 * 1.35, 1 * 1.35, 32, 32]} />
+      <planeGeometry args={[1.33 * 1.1, 1 * 1.1, 16, 16]} />
       <distortionMaterial
-        as any // Mantener aserción temporal
         ref={materialRef}
-        // uTexture={texture} // Se maneja en useFrame
         toneMapped={false}
         transparent={true}
-        // uAlpha={1.0} // Se maneja en useFrame
       />
     </mesh>
   )
