@@ -5,21 +5,22 @@ import { useTransform, useScroll, motion, useVelocity, type MotionValue } from '
 import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { shaderMaterial, useTexture } from '@react-three/drei'
 import * as THREE from 'three' // Import THREE namespace
+import Link from 'next/link'
 
 // Array de imágenes (placeholders por ahora)
 const images_array = [
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
-"/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
+  "/placeholder.svg?height=600&width=800",
 
 ];
 
@@ -68,13 +69,34 @@ extend({ DistortionMaterial })
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      distortionMaterial: any; 
+      distortionMaterial: any;
     }
   }
 }
 
 export default function Projects() {
-  return <HorizontalGallery />
+  return <>
+    <div className="min-h-screen py-16 relative z-10">
+      <div className="flex flex-col md:flex-row justify-between md:items-center px-8 py-4">
+        <div className="text-sm self-start">03/</div>
+        <h2 className="text-center text-xl tracking-widest">projects</h2>
+        <div className="text-sm mx-auto md:mx-0 md:text-base text-center w-[235px] md:text-right mt-5 md:mt-0">
+          <Link href="/projects" className="hover:underline">
+            view all
+          </Link>
+        </div>
+      </div>
+      <HorizontalGallery />
+      <div className="px-8 py-4">
+      <Link
+          href="/projects"
+          className="px-8 py-4 md:px-12 my-10 md:py-6 rounded-full max-w-[calc(100vw-2rem)] md:max-w-md mx-auto md:mx-0 md:ml-auto w-full border text-center border-white hover:bg-white hover:text-black transition-colors text-xl font-bold tracking-wider"
+        >
+          view all projects
+        </Link>
+      </div>
+    </div>
+  </>
 }
 
 function HorizontalGallery() {
@@ -97,15 +119,14 @@ function HorizontalGallery() {
     resize()
     return () => window.removeEventListener("resize", resize)
   }, [])
-  
+
   // Distribuir imágenes a las filas
   const row1Images = images_array.slice(0, 4);
   const row2Images = images_array.slice(4, 8);
   const row3Images = images_array.slice(8, 12);
 
   return (
-    <section className="w-full flex flex-col items-center justify-center py-16 bg-black overflow-x-hidden">
-      <div className="h-[10vh]" />
+    <section className="w-full flex flex-col items-center justify-center bg-black overflow-x-hidden">
       <div className="w-full px-2 md:px-8">
         <div ref={gallery} className="flex flex-col gap-4 md:gap-12 w-full max-w-screen-2xl mx-auto">
           <Row images={row1Images} x={x1} />
@@ -113,7 +134,6 @@ function HorizontalGallery() {
           <Row images={row3Images} x={x3} />
         </div>
       </div>
-      <div className="h-[10vh]" />
     </section>
   )
 }
@@ -135,11 +155,11 @@ function Row({ images, x, reverse = false }: RowProps) {
       {images.map((src, i) => {
         const uniqueKey = `distort-item-${reverse ? 'rev' : 'fwd'}-${i}-${src.split('/').pop()}`;
         return (
-          <div 
+          <div
             key={uniqueKey}
             className="relative w-[calc(40vw-1rem)] md:w-[calc(33.333vw-1rem)] overflow-visible aspect-[4/3] md:w-[calc(33.333vw-2rem)] md:h-[calc((33.333vw-2rem)*0.75)] lg:w-[calc(33.333vw-3rem)] lg:h-[calc((33.333vw-3rem)*0.75)] rounded-lg bg-transparent flex-shrink-0"
           >
-            <DistortingImage src={src} rowMotionX={rowMotionX} itemKey={`canvas-${uniqueKey}`} /> 
+            <DistortingImage src={src} rowMotionX={rowMotionX} itemKey={`canvas-${uniqueKey}`} />
           </div>
         );
       })}
@@ -161,8 +181,8 @@ function MeshWithDistortion({ src, rowMotionX }: Omit<DistortingImageProps, 'ite
   // texture.wrapT = THREE.RepeatWrapping;
   const velocity = useVelocity(rowMotionX)
 
-  useFrame(() => { 
-    if (materialRef.current) { 
+  useFrame(() => {
+    if (materialRef.current) {
       const currentVelocity = velocity.get()
       // Reducir la fuerza de la distorsión y suavizar el efecto
       let strength = Math.abs(currentVelocity) / 1000 // Reducido de 500 a 1000
@@ -172,7 +192,7 @@ function MeshWithDistortion({ src, rowMotionX }: Omit<DistortingImageProps, 'ite
       const velocityThreshold = 0.5 // Umbral más bajo para una respuesta más suave
       if (currentVelocity > velocityThreshold) directionX = 0.5 // Reducir la intensidad de la dirección
       else if (currentVelocity < -velocityThreshold) directionX = -0.5 // Reducir la intensidad de la dirección
-      
+
       // Hacer la transición más suave
       materialRef.current.uniforms.uStrength.value = THREE.MathUtils.lerp(
         materialRef.current.uniforms.uStrength.value,
@@ -185,7 +205,7 @@ function MeshWithDistortion({ src, rowMotionX }: Omit<DistortingImageProps, 'ite
         0.08 // Reducido de 0.15 para una transición más suave
       );
       materialRef.current.uniforms.uDirection.value.y = 0.0;
-      
+
       // Asignar la textura y el alpha al material en cada frame
       materialRef.current.uniforms.uTexture.value = texture;
       materialRef.current.uniforms.uAlpha.value = 1.0; // Mantener alpha en 1.0 por ahora

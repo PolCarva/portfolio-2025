@@ -32,7 +32,7 @@ export default function Paragraph({ paragraph, className = '' }: ParagraphProps)
   return (
     <p 
       ref={container}         
-      className={`text-4xl font-bold leading-relaxed ${className}`}
+      className={`text-2xl md:text-4xl font-bold leading-relaxed ${className}`}
     >
       {words.map((word, i) => {
         const start = i / words.length
