@@ -12,7 +12,7 @@ export default function RippleTitle({ title }: { title: string }) {
     // Generate SVG text on the client side to avoid hydration mismatch
     const svgText = encodeURIComponent(`
       <svg width="100vw" height="100vh" xmlns="http://www.w3.org/2000/svg">
-        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        <text class="text-gabarito" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
           font-size="${title.length < 10 && screenSize < 768 ? '20vw' : '12vw'}" font-family="Gabarito, sans-serif" font-weight="bold" fill="#fafafa">
           ${title}
         </text>
