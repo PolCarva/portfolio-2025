@@ -32,9 +32,9 @@ export default function Contact() {
         <div className="flex justify-center">
           <Link
             href="mailto:pablocarvalhogimenez@gmail.com"
-            className="rounded-full border border-white w-32 h-32 flex items-center justify-center hover:bg-white hover:text-black transition-colors"
+            className="rounded-full border border-white w-32 h-32 md:w-40 md:h-40 flex items-center justify-center hover:bg-white hover:text-black transition-colors"
           >
-            <div className="text-center text-sm">
+            <div className="text-center md:text-lg text-sm">
               write a<br />
               message
             </div>

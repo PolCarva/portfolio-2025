@@ -27,7 +27,7 @@ export default function ProfileImage({ src, alt, className = "" }: ProfileImageP
   return (
     <div 
       ref={containerRef} 
-      className={`relative w-full aspect-square overflow-hidden ${className}`}
+      className={`relative w-full aspect-square overflow-hidden rounded-lg ${className}`}
     >
       <motion.div
         style={{
