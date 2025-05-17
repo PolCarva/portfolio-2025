@@ -38,7 +38,7 @@ export default function About() {
 
         <div className="relative w-full max-w-2xl mx-auto">
           <ProfileImage
-            src="/placeholder.svg?height=600&width=800"
+            src="/images/profile.png"
             alt="Profile photo"
           />
         </div>
@@ -52,9 +52,10 @@ export default function About() {
 
       <Slider
         images={[
-          "/placeholder.svg?height=600&width=800",
-          "/placeholder.svg?height=600&width=800",
-          "/placeholder.svg?height=600&width=800",
+          "/images/liquid2.jpg",
+          "/images/liquid.jpg",
+          "/images/liquid3.jpg",
+ 
         ]}
       />
         

@@ -8,18 +8,17 @@ import Image from 'next/image'
 
 // Array de imágenes (placeholders por ahora)
 const images_array = [
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
-  "/placeholder.svg?height=600&width=800",
+  "/images/projects/wordle.png",
+  "/images/projects/fito.svg",
+  "/images/projects/alumnosjs.png",
+  "/images/projects/filo.jpg",
+  "/images/projects/msm.png",
+  "/images/projects/wordle.png",
+  "/images/projects/dark.png",
+  "/images/projects/alumnosjs.png",
+  "/images/projects/fito.svg",
+  "/images/projects/filo.jpg",
+  "/images/projects/msm.png",
 ]
 
 export default function Projects() {
@@ -63,7 +62,7 @@ function Gallery() {
 
   const { width } = dimension
   const x1 = useTransform(scrollYProgress, [0, 1], [-width * 0.4, 0])
-  const x2 = useTransform(scrollYProgress, [0, 1], [550, width * 0.8])
+  const x2 = useTransform(scrollYProgress, [0, 1], [0, width * 0.8])
   const x3 = useTransform(scrollYProgress, [0, 1], [-width * 0.6, 0])
 
   useEffect(() => {

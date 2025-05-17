@@ -44,7 +44,7 @@ export default function ProfileImage({ src, alt, className = "" }: ProfileImageP
           alt={alt}
           fill
           priority
-          className="object-cover"
+          className="object-cover rounded-lg"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </motion.div>

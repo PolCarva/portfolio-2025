@@ -13,6 +13,7 @@ interface SlideProps {
 interface PhraseProps {
   src: string
   text: string
+  reverse?: boolean
 }
 
 const Slide = ({ direction, progress, left, src }: SlideProps) => {
@@ -24,19 +25,19 @@ const Slide = ({ direction, progress, left, src }: SlideProps) => {
       className="relative flex whitespace-nowrap"
     >
       <Phrase src={src} text="multimedia designer" />
-      <Phrase src={src} text="multimedia designer" />
+      <Phrase src={src} reverse={true} text="multimedia designer" />
       <Phrase src={src} text="multimedia designer" />
     </motion.div>
   )
 }
 
-const Phrase = ({ src, text }: PhraseProps) => {
+const Phrase = ({ src, text, reverse = false }: PhraseProps) => {
   return (
-    <div className="px-5 flex gap-5 items-center">
-        <p className="hidden md:block text-[7.5vw] font-bold">{text}</p>
+    <div className="px-5 flex gap-5 items-center ">
+      <p className=" text-[7.5vw] font-bold">{text}</p>
       <span className="relative h-[7.5vw] aspect-[4/2] rounded-full overflow-hidden">
         <Image 
-          style={{ objectFit: "cover" }} 
+          style={{ objectFit: "cover", objectPosition: "center" }} 
           src={src} 
           alt="Developer" 
           fill
@@ -46,7 +47,7 @@ const Phrase = ({ src, text }: PhraseProps) => {
       <p className="text-[7.5vw] font-bold">{text}</p>
       <span className="relative h-[7.5vw] aspect-[4/2] rounded-full overflow-hidden">
         <Image 
-          style={{ objectFit: "cover" }} 
+          style={{ objectFit: "cover", objectPosition: "bottom" }} 
           src={src} 
           alt="Developer" 
           fill
@@ -56,7 +57,7 @@ const Phrase = ({ src, text }: PhraseProps) => {
       <p className="text-[7.5vw] font-bold">{text}</p>
       <span className="relative h-[7.5vw] aspect-[4/2] rounded-full overflow-hidden">
         <Image 
-          style={{ objectFit: "cover" }} 
+          style={{ objectFit: "cover", objectPosition: "bottom" }} 
           src={src} 
           alt="Developer" 
           fill

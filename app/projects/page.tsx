@@ -2,6 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import Image from 'next/image'
 
 // Array de proyectos (esto deberías moverlo a un archivo separado)
 const projects = [
@@ -58,11 +59,13 @@ export default function ProjectsPage() {
                     <div
                       className="project relative will-change-auto transition-opacity duration-500 opacity-100 md:opacity-35 group-hover:opacity-100"
                     >
-                      <div className="project-img w-full aspect-[4/5] overflow-hidden">
-                        <img
+                      <div className="project-img w-full aspect-[4/5] rounded-lg overflow-hidden">
+                        <Image
+                          width={1000}
+                          height={1000}
                           src={project.image}
                           alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="w-full h-full rounded-lg object-cover transition-transform duration-500 group-hover:scale-110"
                           style={{ transformOrigin: 'center' }}
                         />
                       </div>
@@ -89,11 +92,13 @@ export default function ProjectsPage() {
                     <div
                       className="project relative will-change-auto transition-opacity duration-500 opacity-100 md:opacity-35 group-hover:opacity-100"
                     >
-                      <div className="project-img w-full aspect-[4/5] overflow-hidden">
-                        <img
+                      <div className="project-img w-full aspect-[4/5] rounded-lg overflow-hidden">
+                        <Image
+                          width={1000}
+                          height={1000}
                           src={project.image}
                           alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="w-full h-full rounded-lg object-cover transition-transform duration-500 group-hover:scale-110"
                           style={{ transformOrigin: 'center' }}
                         />
                       </div>
