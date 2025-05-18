@@ -21,7 +21,7 @@ const navItems = [
     },
     {
         title: "contact",
-        href: "/contact",
+        href: "mailto:pablocarvalhogimenez@gmail.com",
     },
 ]
 
