@@ -1,5 +1,7 @@
 "use client";
+import Paragraph from "@/components/ui/character";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 const fadeinup = {
@@ -31,7 +33,7 @@ const data = {
       github: "polcarva",
       website: "www.pablocarvalho.dev"
     },
-    bio: "i am a fullstack developer with a passion for creating beautiful and functional web applications. i am a multimedia design and development graduate. my goal is to work as a web developer or mobile developer part-time.",
+    bio: "i am a fullstack developer with a passion for creating beautiful and functional web applications. i am a multimedia design and development graduate. my goal is to create and develop innovative and functional web applications.",
     languages: [
       { name: "español", level: "nativo" },
       { name: "inglés", level: "intermedio-alto (b2)" }
@@ -43,28 +45,28 @@ const data = {
       title: "mobile developer",
       stack: "react native / nextjs / gopersonal",
       company: "gopersonal",
-      period: "abril 2025 - presente"
+      period: "april 2025 - today"
     },
     {
       id: "work1",
       title: "fullstack developer",
       stack: "shopify / php / wordpress",
       company: "dango digital",
-      period: "julio 2024 - abril 2025"
+      period: "july 2024 - april 2025"
     },
     {
       id: "work1",
       title: "fullstack developer",
       stack: "php / wordpress / nextjs / react",
       company: "ns group",
-      period: "marzo 2024 - presente"
+      period: "march 2024 - today"
     },
     {
       id: "work2",
       title: "frontend developer",
       stack: "react / tailwindcss",
       company: "real proyect - coderhouse",
-      period: "marzo 2023 - octubre 2023"
+      period: "march 2023 - october 2023"
     }
   ],
   studies: [
@@ -73,7 +75,7 @@ const data = {
       title: "licenciatura en diseño multimedia",
       description: "especialización en creación de sitios web.",
       institution: "ort university uruguay",
-      period: "2020 - presente"
+      period: "2020 - today"
     },
     {
       id: "edu2",
@@ -88,15 +90,7 @@ const data = {
     { id: "course2", name: "flutter", institution: "udemy", year: "2023" },
     { id: "course3", name: "php", institution: "udemy", year: "2023" }
   ],
-  skills: {
-    frontend: ["html", "css", "typescript", "react", "next", "wordpress", "figma"],
-    backend: ["node", "nosql", "sql", "express", "php", "patrones de diseño (mvc)"]
-  },
-  others: [
-    "metodología ágil: scrum",
-    "control de versiones (git)",
-    "search engine optimization"
-  ],
+
   portfolio: {
     text: "puedes acceder a algunos de mis proyectos personales más recientes en mi portafolio web!",
     link: "www.pablocarvalho.dev"
@@ -114,10 +108,12 @@ export default function aboutpage() {
             variants={fadeinup}
             initial="hidden"
             animate="visible"
-            className="w-20 h-20 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white mb-4 md:mb-12 shadow-lg"
+            className="w-20 h-20 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-white mb-4 shadow-lg"
           >
-            <img
-              src="/profile.jpg"
+            <Image
+              width={100}
+              height={100}
+              src="/images/profile.png"
               alt="profile"
               className="w-full h-full object-cover"
             />
@@ -129,51 +125,9 @@ export default function aboutpage() {
             transition={{ delay: 0.1 }}
             className="flex items-center gap-2 md:gap-4 mb-2 md:mb-6 text-base md:text-3xl"
           >
-            <span className="text-pink-400">🌏</span>
-            <div className="flex flex-col gap-2 mt-4">
-              <span className="text-xs md:text-lg text-gray-400">teléfono: {data.profile.contact.phone}</span>
-              <span className="text-xs md:text-lg text-gray-400">email: {data.profile.contact.email}</span>
-              <span className="text-xs md:text-lg text-gray-400">github: {data.profile.contact.github}</span>
-              <span className="text-xs md:text-lg text-gray-400">web: {data.profile.contact.website}</span>
-            </div>
+            <span className="text-lg">🌏 Montevideo, Uruguay</span>
           </motion.div>
-          <motion.div
-            variants={fadeinup}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.2 }}
-            className="flex flex-wrap gap-1 md:gap-4 mb-4 md:mb-14"
-          >
-            {data.profile.languages.map((lang) => (
-              <motion.button
-                key={lang.name}
-                type="button"
-                whileHover={{
-                  scale: 1.08,
-                  backgroundColor: "#fff",
-                  color: "#000",
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="px-3 py-1 md:px-8 md:py-3 rounded-full border border-gray-600 text-xs md:text-2xl text-gray-300 bg-transparent hover:bg-white hover:text-black transition"
-              >
-                {lang.name}
-              </motion.button>
-            ))}
-            <motion.div className="flex gap-1 md:gap-4">
-              <motion.a
-                href={data.profile.contact.github}
-                whileHover={{
-                  scale: 1.08,
-                  backgroundColor: "#fff",
-                  color: "#000",
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="px-3 py-1 md:px-7 md:py-3 rounded-full border border-gray-600 text-xs md:text-2xl text-gray-300 bg-transparent hover:bg-white hover:text-black transition"
-              >
-                github
-              </motion.a>
-            </motion.div>
-          </motion.div>
+
           {/* menú de secciones en mobile */}
           <motion.nav
             variants={fadeinmenu}
@@ -203,9 +157,9 @@ export default function aboutpage() {
             variants={fadeinmenu}
             initial="hidden"
             animate="visible"
-            className="hidden md:flex flex-col items-start sticky top-32 h-full w-full pr-8 mt-12"
+            className="hidden md:flex flex-col items-start md:sticky top-32 h-full w-full pr-8 mt-12"
           >
-            <ul className="space-y-6 text-gray-400 text-3xl font-light">
+            <ul className="space-y-6 text-gray-400 text-xl font-light">
               {data.menu.map((item) => (
                 <motion.li
                   key={item}
@@ -236,8 +190,8 @@ export default function aboutpage() {
             className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-14"
           >
             <div>
-            <Link
-                href="/curriculum"
+              <Link
+                href="/about"
                 className="px-8 py-4 md:px-12 my-10 md:py-6 rounded-full max-w-[calc(100vw-2rem)] md:max-w-md mx-auto md:mx-0 md:ml-auto w-full border text-center border-white hover:bg-white hover:text-black transition-colors text-xl font-bold tracking-wider"
               >
                 schedule a call
@@ -248,33 +202,8 @@ export default function aboutpage() {
               <h2 className="text-base md:text-4xl text-gray-400 font-light mb-2 md:mb-10">
                 {data.profile.role}
               </h2>
-              <div className="flex gap-2 md:gap-6 mb-2 md:mb-10">
-                <motion.a
-                  href={data.profile.contact.github}
-                  whileHover={{
-                    scale: 1.08,
-                    backgroundColor: "#fff",
-                    color: "#000",
-                  }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="px-3 py-1 md:px-7 md:py-3 rounded-full border border-gray-600 text-xs md:text-2xl text-gray-300 bg-transparent hover:bg-white hover:text-black transition"
-                >
-                  github
-                </motion.a>
-                <motion.a
-                  href={data.profile.contact.email}
-                  whileHover={{
-                    scale: 1.08,
-                    backgroundColor: "#fff",
-                    color: "#000",
-                  }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="px-3 py-1 md:px-7 md:py-3 rounded-full border border-gray-600 text-xs md:text-2xl text-gray-300 bg-transparent hover:bg-white hover:text-black transition"
-                >
-                  email
-                </motion.a>
-              </div>
-              <p className="text-sm md:text-3xl text-gray-200 max-w-full md:max-w-3xl leading-relaxed">
+
+              <p className="text-2xl md:text-4xl font-bold leading-relaxed">
                 {data.profile.bio}
               </p>
             </div>
@@ -293,17 +222,17 @@ export default function aboutpage() {
               work experience
             </h3>
             {data.work.map((job) => (
-              <div key={job.id} className={job === data.work[0] ? "mb-4 md:mb-16" : ""}>
+              <div key={`work-${job.id}-${job.company}`} className={job === data.work[0] ? "mb-4 md:mb-16" : ""}>
                 <h4 className="text-lg md:text-3xl font-semibold">
                   {job.company}
                   <span className="text-gray-400 text-base md:text-2xl font-normal ml-3 text-white/80">
                     - {job.title}
                   </span>
                 </h4>
-                <p className="text-sm md:text-2xl text-gray-300">
+                <p className="text-sm md:text-2xl text-gray">
                   {job.stack}
                 </p>
-                <p className="text-sm md:text-2xl text-gray-300">
+                <p className="text-sm md:text-2xl text-gray">
                   {job.period}
                 </p>
               </div>
@@ -327,13 +256,13 @@ export default function aboutpage() {
                 <h4 className="text-lg md:text-3xl font-semibold">
                   {study.title}
                 </h4>
-                <p className="text-sm md:text-2xl text-gray-300">
+                <p className="text-sm md:text-2xl text-gray">
                   {study.description}
                 </p>
-                <p className="text-sm md:text-2xl text-gray-300">
+                <p className="text-sm md:text-2xl text-gray">
                   {study.institution}
                 </p>
-                <p className="text-sm md:text-2xl text-gray-300">
+                <p className="text-sm md:text-2xl text-gray">
                   {study.period}
                 </p>
               </div>
@@ -349,42 +278,14 @@ export default function aboutpage() {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h3 className="text-xl md:text-5xl font-bold mb-4 md:mb-14">
+            <h3 className="text-xl md:text-5xl font-bold mb-4">
               technical skills
             </h3>
-            <ul className="flex flex-wrap gap-2 md:gap-8 text-gray-300">
-              {data.skills.frontend.map((skill) => (
-                <motion.li
-                  key={skill}
-                  whileHover={{
-                    scale: 1.08,
-                    backgroundColor: "#fff",
-                    color: "#000",
-                  }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="px-3 py-1 md:px-8 md:py-4 border border-gray-600 rounded-full text-xs md:text-2xl bg-transparent hover:bg-white hover:text-black transition"
-                >
-                  {skill}
-                </motion.li>
-              ))}
-            </ul>
-            <ul className="flex flex-wrap gap-2 md:gap-8 text-gray-300">
-              {data.skills.backend.map((skill) => (
-                <motion.li
-                  key={skill}
-                  whileHover={{
-                    scale: 1.08,
-                    backgroundColor: "#fff",
-                    color: "#000",
-                  }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="px-3 py-1 md:px-8 md:py-4 border border-gray-600 rounded-full text-xs md:text-2xl bg-transparent hover:bg-white hover:text-black transition"
-                >
-                  {skill}
-                </motion.li>
-              ))}
-            </ul>
+            <Paragraph paragraph="my favourite stack is nextjs, tailwindcss and node with mongodb as database. i also have experience with react native, flutter and php with wordpress. i am a quick learner and i am always looking for new challenges." />
+
           </motion.div>
+
+          
         </section>
       </div>
     </main>

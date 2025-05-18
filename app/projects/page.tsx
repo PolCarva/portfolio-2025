@@ -3,38 +3,8 @@ import React from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
+import { projects } from '../data/projects'
 
-// Array de proyectos (esto deberías moverlo a un archivo separado)
-const projects = [
-  {
-    id: 1,
-    column: 1,
-    title: "Stellar Horizon",
-    description: "Creative Campaign, Augmented Reality, Interactive Design",
-    image: "/placeholder.svg?height=600&width=800"
-  },
-  {
-    id: 2,
-    column: 2,
-    title: "Velvet Mirage — Echo Chamber",
-    description: "Music Video, Color Grading, 3D Environments",
-    image: "/placeholder.svg?height=600&width=800"
-  },
-  {
-    id: 3,
-    column: 1,
-    title: "Proyecto 3",
-    description: "Descripción del proyecto 3",
-    image: "/placeholder.svg?height=600&width=800"
-  },
-  {
-    id: 4,
-    column: 2,
-    title: "Proyecto 4",
-    description: "Descripción del proyecto 4",
-    image: "/placeholder.svg?height=600&width=800"
-  }
-]
 
 export default function ProjectsPage() {
   return (
@@ -52,7 +22,7 @@ export default function ProjectsPage() {
                 .filter((project) => project.column === 1)
                 .map((project) => (
                   <Link
-                    href={`/projects/${project.id}`}
+                    href={project.link}
                     key={project.id}
                     className="no-underline group"
                   >

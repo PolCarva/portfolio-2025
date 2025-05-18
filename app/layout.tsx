@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import { Gabarito } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar"
+import Footer from "@/components/footer"
 const gabarito = Gabarito({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -22,6 +23,8 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Navbar />
             {children}
+            <Footer />
+
         </ThemeProvider>
       </body>
     </html>

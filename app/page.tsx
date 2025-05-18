@@ -3,7 +3,6 @@ import About from "@/components/about"
 import Projects from "@/components/projects"
 import Contact from "@/components/contact"
 import Line from "@/components/ui/line"
-import Footer from "@/components/footer"
 
 export default function Home() {
   return (
@@ -15,7 +14,6 @@ export default function Home() {
       <Projects />
       <Line />
       <Contact />
-      <Footer />
     </main>
   )
 }

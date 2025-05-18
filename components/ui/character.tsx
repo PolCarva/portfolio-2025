@@ -2,7 +2,6 @@
 
 import { useScroll, useTransform, motion, MotionValue } from 'framer-motion'
 import { useRef } from 'react'
-import styles from './style.module.scss';
 
 interface ParagraphProps {
   paragraph: string

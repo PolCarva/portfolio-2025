@@ -43,10 +43,10 @@ export default function About() {
           />
         </div>
         <Link
-          href="/curriculum"
+          href="/about"
           className="px-8 py-4 md:px-12 my-10 md:py-6 rounded-full max-w-[calc(100vw-2rem)] md:max-w-md mx-auto md:mx-0 md:ml-auto w-full border text-center border-white hover:bg-white hover:text-black transition-colors text-xl font-bold tracking-wider"
         >
-          view my curriculum
+          view my about
         </Link>
       </div>
 

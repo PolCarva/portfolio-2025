@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function Content() {
@@ -31,16 +32,16 @@ const Nav = () => {
         <div className='flex shrink-0 gap-20'>
             <div className='flex flex-col gap-2'>
                 <h3 className='mb-2 text-gray font-bold'>menu</h3>
-                <p>home</p>
-                <p>projects</p>
-                <p>about</p>
-                <p>contact</p>
+                <Link href="/">home</Link>
+                <Link href="/projects">projects</Link>
+                <Link href="/about">about</Link>
+                <Link href="mailto:pablocarvalhogimenez@gmail.com">contact</Link>
             </div>
             <div className='flex flex-col gap-2'>
                 <h3 className='mb-2 text-gray font-bold'>social</h3>
-                <p>instagram</p>
-                <p>linkedin</p>
-                <p>github</p>
+                <Link href="https://www.linkedin.com/in/pablo-carvalho-gimenez/">linkedin</Link>
+                <Link href="https://github.com/polcarva">github</Link>
+                <Link href="https://www.instagram.com/pablocarvalhog/">instagram</Link>
             </div>
 
 
