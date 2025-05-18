@@ -8,7 +8,7 @@ export default function Hero() {
       <h1 className="sr-only">
         pablo carvalho | full stack developer & multimedia designer
       </h1>
-      <div className="absolute z-10 bottom-16 md:right-16 max-w-2xl flex flex-col items-start gap-8">
+      <div className="absolute z-20 bottom-16 md:right-16 max-w-2xl flex flex-col items-start gap-8">
         <p className="text-2xl px-4 md:px-0 text-center md:text-left md:text-4xl font-bold">
           i create digital experiences to solve real life problems.
         </p>

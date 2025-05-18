@@ -5,7 +5,6 @@ import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import { projects } from '../data/projects'
 
-
 export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-black text-white">
@@ -29,10 +28,10 @@ export default function ProjectsPage() {
                     <div
                       className="project relative will-change-auto transition-opacity duration-500 opacity-100 md:opacity-35 group-hover:opacity-100"
                     >
-                      <div className="project-img w-full aspect-[4/5] rounded-lg overflow-hidden">
+                      <div className="project-img w-full aspect-video rounded-lg overflow-hidden">
                         <Image
-                          width={1000}
-                          height={1000}
+                          width={1920}
+                          height={1080}
                           src={project.image}
                           alt={project.title}
                           className="w-full h-full rounded-lg object-cover transition-transform duration-500 group-hover:scale-110"
@@ -40,10 +39,10 @@ export default function ProjectsPage() {
                         />
                       </div>
                       <div className="project-name mt-6 mb-2.5">
-                        <h2 className="text-xl font-medium text-white">{project.title}</h2>
+                        <h2 className="text-xl font-medium lowercase text-white">{project.title}</h2>
                       </div>
                       <div className="project-description">
-                        <p className="text-base text-gray-400">{project.description}</p>
+                        <p className="text-base text-gray-400 lowercase">{project.description}</p>
                       </div>
                     </div>
                   </Link>
@@ -62,10 +61,10 @@ export default function ProjectsPage() {
                     <div
                       className="project relative will-change-auto transition-opacity duration-500 opacity-100 md:opacity-35 group-hover:opacity-100"
                     >
-                      <div className="project-img w-full aspect-[4/5] rounded-lg overflow-hidden">
+                      <div className="project-img w-full aspect-video rounded-lg overflow-hidden">
                         <Image
-                          width={1000}
-                          height={1000}
+                          width={1920}
+                          height={1080}
                           src={project.image}
                           alt={project.title}
                           className="w-full h-full rounded-lg object-cover transition-transform duration-500 group-hover:scale-110"
@@ -73,10 +72,10 @@ export default function ProjectsPage() {
                         />
                       </div>
                       <div className="project-name mt-6 mb-2.5">
-                        <h2 className="text-xl font-medium text-white">{project.title}</h2>
+                        <h2 className="text-xl font-medium lowercase text-white">{project.title}</h2>
                       </div>
                       <div className="project-description">
-                        <p className="text-base text-gray-400">{project.description}</p>
+                        <p className="text-base text-gray-400 lowercase">{project.description}</p>
                       </div>
                     </div>
                   </Link>

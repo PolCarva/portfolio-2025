@@ -101,9 +101,9 @@ const data = {
 export default function aboutpage() {
   return (
     <main className="min-h-screen bg-black text-white pt-16">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-0 px-2 md:px-12 py-6 md:py-20">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-0 px-8 md:px-12 py-6 md:py-20">
         {/* columna 1: perfil y menú */}
-        <aside className="w-full md:w-1/3 flex flex-col items-center md:items-start sticky top-8 md:top-32 self-start md:ml-0 md:mr-8 mb-6 md:mb-0">
+        <aside className="w-full md:w-1/3 flex flex-col items-center md:items-start md:sticky top-8 md:top-32 self-start md:ml-0 md:mr-8 mb-6 md:mb-0">
           <motion.div
             variants={fadeinup}
             initial="hidden"
@@ -191,10 +191,10 @@ export default function aboutpage() {
           >
             <div>
               <Link
-                href="/about"
-                className="px-8 py-4 md:px-12 my-10 md:py-6 rounded-full max-w-[calc(100vw-2rem)] md:max-w-md mx-auto md:mx-0 md:ml-auto w-full border text-center border-white hover:bg-white hover:text-black transition-colors text-xl font-bold tracking-wider"
+                href="mailto:pablocarvalhogimenez@gmail.com"
+                className="px-8 py-4 w-full block md:inline md:px-12 my-10 md:py-6 rounded-full nd:max-w-[calc(100vw-2rem)] md:max-w-md mx-auto md:mx-0 md:ml-auto border text-center border-white hover:bg-white hover:text-black transition-colors text-xl font-bold tracking-wider"
               >
-                schedule a call
+                get in touch
               </Link>
               <h1 className="text-2xl md:text-7xl font-extrabold mb-2 md:mb-6 mt-10 tracking-tight leading-tight">
                 {data.profile.name}
@@ -281,7 +281,7 @@ export default function aboutpage() {
             <h3 className="text-xl md:text-5xl font-bold mb-4">
               technical skills
             </h3>
-            <Paragraph paragraph="my favourite stack is nextjs, tailwindcss and node with mongodb as database. i also have experience with react native, flutter and php with wordpress. i am a quick learner and i am always looking for new challenges." />
+            <Paragraph className="lowercase" paragraph="My favorite stack includes Next.js, Tailwind CSS, and Node.js, with MongoDB as the database. I'm also experienced with a variety of other technologies and adapt easily to project requirements. Constantly learning and eager for new challenges, I bring flexibility and a growth mindset to every team." />
 
           </motion.div>
 
