@@ -17,15 +17,11 @@ export default function About() {
             email
           </Link>{" "}
           /
-          <Link href="https://instagram.com" className="hover:underline ml-2">
-            instagram
+          <Link href="https://github.com/PolCarva" className="hover:underline ml-2" target="_blank">
+            github
           </Link>{" "}
           /
-          <Link href="https://twitter.com" className="hover:underline ml-2">
-            twitter
-          </Link>{" "}
-          /
-          <Link href="https://linkedin.com" className="hover:underline ml-2">
+          <Link href="https://linkedin.com/in/pablo-carvalho-gimenez" className="hover:underline ml-2" target="_blank">
             linkedin
           </Link>
         </div>

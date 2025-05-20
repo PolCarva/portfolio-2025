@@ -39,9 +39,9 @@ const Nav = () => {
             </div>
             <div className='flex flex-col gap-2'>
                 <h3 className='mb-2 text-gray font-bold'>social</h3>
-                <Link href="https://www.linkedin.com/in/pablo-carvalho-gimenez/">linkedin</Link>
-                <Link href="https://github.com/polcarva">github</Link>
-                <Link href="https://www.instagram.com/pablocarvalhog/">instagram</Link>
+                <Link href="https://www.linkedin.com/in/pablo-carvalho-gimenez/" target="_blank">linkedin</Link>
+                <Link href="https://github.com/polcarva" target="_blank">github</Link>
+                <Link href="mailto:pablocarvalhogimenez@gmail.com">email</Link>
             </div>
 
 
