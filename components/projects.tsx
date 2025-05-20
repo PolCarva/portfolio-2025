@@ -6,7 +6,6 @@ import Paragraph from './ui/character'
 import Image from 'next/image'
 
 
-// Array de imágenes (placeholders por ahora)
 const projects_array = [
   {
     title: "La Creación",

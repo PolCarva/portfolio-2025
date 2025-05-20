@@ -1,0 +1,16 @@
+{
+  "name": "pablo carvalho portfolio",
+  "short_name": "pablo",
+  "description": "full stack developer and designer specializing in web development, product design, and brand identity.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#38bdf8",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+} 
