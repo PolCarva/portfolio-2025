@@ -54,7 +54,8 @@ export default function ProjectsPage() {
                 .filter((project) => project.column === 2)
                 .map((project) => (
                   <Link
-                    href={`/projects/${project.id}`}
+                    href={project.link} 
+                    target="_blank"
                     key={project.id}
                     className="no-underline group"
                   >
