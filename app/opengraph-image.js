@@ -11,7 +11,7 @@ export const size = {
 const isProduction = process.env.NODE_ENV === 'production'
 
 const imageUrl = isProduction
-  ? 'https://pablocarvalho.dev/images/profile.png'
+  ? 'https://portfolio-2025-seven-iota.vercel.app/images/profile.png'
   : 'http://localhost:3000/images/profile.png'
 
 

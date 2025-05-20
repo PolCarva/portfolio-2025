@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { projects } from './data/projects'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://pablocarvalho.dev'
+  const baseUrl = 'https://portfolio-2025-seven-iota.vercel.app'
   
   // Static routes
   const routes = [

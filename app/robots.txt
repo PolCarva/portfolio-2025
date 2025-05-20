@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://pablocarvalho.dev/sitemap.xml
+Sitemap: https://portfolio-2025-seven-iota.vercel.app/sitemap.xml
 
 # Disallow admin and api routes
 Disallow: /api/

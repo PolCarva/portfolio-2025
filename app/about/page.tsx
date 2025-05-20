@@ -31,7 +31,7 @@ const data = {
       phone: "+598 94 375 127",
       email: "pablocarvalhogimenez@gmail.com",
       github: "polcarva",
-      website: "www.pablocarvalho.dev"
+      website: "www.portfolio-2025-seven-iota.vercel.app"
     },
     bio: "i am a fullstack developer with a passion for creating beautiful and functional web applications. i am a multimedia design and development graduate. my goal is to create and develop innovative and functional web applications.",
     languages: [
@@ -93,7 +93,7 @@ const data = {
 
   portfolio: {
     text: "puedes acceder a algunos de mis proyectos personales más recientes en mi portafolio web!",
-    link: "www.pablocarvalho.dev"
+    link: "www.portfolio-2025-seven-iota.vercel.app"
   },
   menu: ["introduction", "work experience", "studies", "technical skills"],
 };

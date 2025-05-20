@@ -8,7 +8,7 @@ import Footer from "@/components/footer"
 const gabarito = Gabarito({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://pablocarvalho.dev'),
+  metadataBase: new URL('https://portfolio-2025-seven-iota.vercel.app'),
   title: {
     default: 'pablo carvalho | full stack developer & designer',
     template: '%s | pablo carvalho',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://pablocarvalho.dev',
+    url: 'https://portfolio-2025-seven-iota.vercel.app',
     siteName: 'pablo carvalho portfolio',
     title: 'pablo carvalho | full stack developer & designer',
     description: 'full stack developer and designer specializing in web development, product design, and brand identity.',
