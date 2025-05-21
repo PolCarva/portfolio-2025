@@ -7,6 +7,11 @@ export default function RippleTitle({ title }: { title: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const { width: screenSize } = useScreenSize()
   const [svgBackground, setSvgBackground] = useState<string>('')
+  const [isFirefox, setIsFirefox] = useState(false)
+
+  useEffect(() => {
+    setIsFirefox(navigator.userAgent.toLowerCase().includes('firefox'))
+  }, [])
 
   useEffect(() => {
     // Generate SVG text on the client side to avoid hydration mismatch
@@ -70,12 +75,35 @@ export default function RippleTitle({ title }: { title: string }) {
     <div
       ref={ref}
       className="relative w-full h-screen flex items-center justify-center"
-      style={{
+      style={!isFirefox ? {
         backgroundImage: svgBackground,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-      }}
-    />
+      } : undefined}
+    >
+      {isFirefox && (
+        <svg 
+          className="absolute inset-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <text 
+            className="text-gabarito pointer-events-none select-none"
+            x="50%"
+            y="50%"
+            dominantBaseline="middle"
+            textAnchor="middle"
+            style={{
+              fontSize: title.length < 10 && screenSize < 768 ? '20vw' : '12vw',
+              fontFamily: 'Gabarito, sans-serif',
+              fontWeight: 'bold',
+              fill: '#fafafa'
+            }}
+          >
+            {title}
+          </text>
+        </svg>
+      )}
+    </div>
   )
 }
