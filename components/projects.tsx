@@ -124,7 +124,7 @@ function Gallery() {
   const row3Projects = projects_array.slice(8, 12)
 
   return (
-    <section className="w-full flex flex-col items-center justify-center bg-black overflow-hidden h-[60vh] md:h-[75vh] relative">
+    <section className="w-full flex flex-col items-center justify-center overflow-hidden h-[60vh] md:h-[75vh] relative">
       <div className="w-full px-2 md:px-8">
         <div
           ref={galleryRef}

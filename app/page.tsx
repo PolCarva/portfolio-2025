@@ -6,7 +6,7 @@ import Line from "@/components/ui/line"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white relative">
+    <main className="min-h-screen bg-black text-white relative pb-3">
       <Hero />
       <Line />
       <About />
