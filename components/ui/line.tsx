@@ -69,7 +69,7 @@ export default function Line() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full translate-y-px">
       <div className="relative w-full h-px">
         <div
           onMouseEnter={manageMouseEnter}
