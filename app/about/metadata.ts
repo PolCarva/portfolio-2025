@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     siteName: 'pablo carvalho portfolio',
     images: [
       {
-        url: '/images/og-about.jpg',
+        url: '/opengraph-image.png',
         width: 1200,
         height: 630,
         alt: 'pablo carvalho about',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'about | pablo carvalho',
     description: 'fullstack developer based in montevideo, uruguay. specializing in web development, product design, and brand identity.',
-    images: ['/images/og-about.jpg'],
+    images: ['/opengraph-image.png'],
   },
   robots: {
     index: true,

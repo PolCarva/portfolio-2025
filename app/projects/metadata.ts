@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     siteName: 'pablo carvalho portfolio',
     images: [
       {
-        url: '/images/og-projects.jpg',
+        url: '/opengraph-image.png',
         width: 1200,
         height: 630,
         alt: 'pablo carvalho projects',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'projects | pablo carvalho',
     description: 'explore my portfolio of web development, product design, and brand identity projects.',
-    images: ['/images/og-projects.jpg'],
+    images: ['/opengraph-image.png'],
   },
   robots: {
     index: true,

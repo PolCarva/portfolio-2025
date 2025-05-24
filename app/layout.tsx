@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     description: 'full stack developer and designer specializing in web development, product design, and brand identity.',
     images: [
       {
-        url: '/opengraph-image',
+        url: '/opengraph-image.png',
         width: 1200,
         height: 630,
         alt: 'pablo carvalho portfolio',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'pablo carvalho | full stack developer & designer',
     description: 'full stack developer and designer specializing in web development, product design, and brand identity.',
-    images: ['/opengraph-image'],
+    images: ['/opengraph-image.png'],
     creator: '@yourtwitterhandle',
   },
   robots: {
