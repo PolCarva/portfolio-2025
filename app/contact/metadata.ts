@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'contact | pablo carvalho',
     description: 'get in touch with pablo carvalho, fullstack developer. available for freelance projects, collaborations, and full-time opportunities. let\'s create something amazing together.',
-    url: 'https://portfolio-2025-seven-iota.vercel.app/contact',
+    url: 'https://2025.pablocarvalho.dev/contact',
     siteName: 'pablo carvalho portfolio',
     images: [
       {
