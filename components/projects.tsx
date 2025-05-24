@@ -1,9 +1,10 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { useTransform, useScroll, motion, useVelocity, type MotionValue } from 'framer-motion'
+import { useTransform, useScroll, motion, type MotionValue } from 'framer-motion'
 import Link from 'next/link'
 import Paragraph from './ui/character'
 import Image from 'next/image'
+import WaterLink from './ui/water-link'
 
 
 const projects_array = [
@@ -42,7 +43,7 @@ const projects_array = [
     image: "/images/projects/dark.png",
     link: "https://darkjail.com/",
   },
- 
+
 
   {
     title: "Fito",
@@ -81,10 +82,10 @@ export default function Projects() {
       </div>
       <div className="flex flex-col-reverse gap-8 px-8 md:flex-row justify-between md:items-end   mb-12 mt-8 md:mt-16">
         <div>
-          <Link
+          <WaterLink
             href="/projects"
-            className="px-8 block md:inline py-4 md:px-12 md:py-6 rounded-full max-w-[calc(100vw-2rem)] md:max-w-md mx-auto md:mx-0 md:ml-auto w-full border text-center border-white hover:bg-white hover:text-black transition-colors text-xl font-bold tracking-wider">  view all projects
-          </Link>
+            className="px-8 block md:inline-block py-4 md:px-12 md:py-6 rounded-full max-w-[calc(100vw-2rem)] md:max-w-md mx-auto md:mx-0 md:ml-auto w-full border text-center border-white duration-1000 hover:text-black transition-colors text-xl font-bold tracking-wider">view all projects
+          </WaterLink>
         </div>
         <div className="max-w-xl">
 

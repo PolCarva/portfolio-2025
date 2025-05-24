@@ -1,5 +1,5 @@
-import Link from "next/link"
 import RippleTitle from "./ripple-title"
+import WaterLink from "./ui/water-link"
 
 export default function Hero() {
   return (
@@ -12,12 +12,12 @@ export default function Hero() {
         <p className="text-2xl px-4 md:px-0 text-center md:text-left md:text-4xl font-bold">
           i create digital experiences to solve real life problems.
         </p>
-        <Link
+        <WaterLink
           href="#contact"
-          className="px-8 py-4 md:px-12 md:py-6 rounded-full max-w-[calc(100%-2rem)] mx-auto md:mx-0 w-full border text-center border-white hover:bg-white hover:text-black transition-colors text-xl font-bold tracking-wider"
+          className="px-8 py-4 md:px-12 md:py-6 rounded-full max-w-[calc(100%-2rem)] mx-auto duration-1000 md:mx-0 w-full border text-center border-white hover:text-black transition-colors text-xl font-bold tracking-wider"
         >
           let's work together
-        </Link>
+        </WaterLink>
       </div>
     </section>
   )

@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
+import WaterLink from "./ui/water-link"
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -30,15 +31,15 @@ export default function Contact() {
         <h2 className="text-6xl md:text-8xl font-bold tracking-tighter mb-16">let's connect</h2>
 
         <div className="flex justify-center">
-          <Link
+          <WaterLink
             href="mailto:pablocarvalhogimenez@gmail.com"
-            className="rounded-full border border-white w-32 h-32 md:w-40 md:h-40 flex items-center justify-center hover:bg-white hover:text-black transition-colors"
+            className="rounded-full border border-white w-32 h-32 md:w-40 md:h-40 flex items-center justify-center duration-1000 hover:text-black transition-colors"
           >
             <div className="text-center md:text-lg text-sm">
               write a<br />
               message
             </div>
-          </Link>
+          </WaterLink>
         </div>
       </div>
     </motion.section>
