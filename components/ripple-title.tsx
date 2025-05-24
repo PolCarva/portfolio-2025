@@ -4,20 +4,49 @@ import { useEffect, useRef, useState } from 'react'
 import { useScreenSize } from '@/hooks/useScreenSize'
 import { motion } from 'framer-motion'
 
+function isWebGLSupported() {
+  try {
+    const canvas = document.createElement('canvas')
+    return !!(window.WebGLRenderingContext &&
+      (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')))
+  } catch (e) {
+    return false
+  }
+}
+
+function isMobile() {
+  if (typeof navigator === 'undefined') return false
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+}
+
+function isFirefox() {
+  if (typeof navigator === 'undefined') return false
+  return navigator.userAgent.toLowerCase().includes('firefox')
+}
+
+function isIE() {
+  if (typeof navigator === 'undefined') return false
+  return /MSIE|Trident/.test(navigator.userAgent)
+}
+
 export default function RippleTitle({ title }: { title: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const { width: screenSize } = useScreenSize()
   const [svgBackground, setSvgBackground] = useState<string>('')
-  const [isFirefox, setIsFirefox] = useState(false)
+
+  // Detectar entorno
+  const [shouldFallback, setShouldFallback] = useState(false)
 
   useEffect(() => {
-    setIsFirefox(navigator.userAgent.toLowerCase().includes('firefox'))
+    setShouldFallback(
+      isMobile() || isFirefox() || isIE() || !isWebGLSupported()
+    )
   }, [])
 
   useEffect(() => {
     // Generate SVG text on the client side to avoid hydration mismatch
     const svgText = encodeURIComponent(`
-      <svg width="100vw" height="100vh" xmlns="http://www.w3.org/2000/svg">
+      <svg width="100svw" height="70svh" xmlns="http://www.w3.org/2000/svg">
         <text class="text-gabarito" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
           font-size="${title.length < 10 && screenSize < 768 ? '20vw' : '12vw'}" font-family="Gabarito, sans-serif" font-weight="bold" fill="#fafafa">
           ${title}
@@ -28,11 +57,10 @@ export default function RippleTitle({ title }: { title: string }) {
   }, [title, screenSize])
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !ref.current) return
+    if (typeof window === 'undefined' || !ref.current || shouldFallback) return
 
     const localRef = ref.current
 
-    // Load jQuery if not present
     function loadScript(src: string) {
       return new Promise<void>((resolve) => {
         const script = document.createElement('script')
@@ -44,54 +72,56 @@ export default function RippleTitle({ title }: { title: string }) {
     }
 
     async function setupRipples() {
-      // Load jQuery if it doesn't exist
-      if (!('jQuery' in window)) {
-        await loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
-      }
-      // Load the plugin if it doesn't exist
-      if (!('ripples' in (window as any).jQuery.fn)) {
-        await loadScript('https://cdn.jsdelivr.net/npm/jquery.ripples@0.6.3/dist/jquery.ripples.min.js')
-      }
-      // Apply the effect
-      if (localRef && (window as any).jQuery) {
-        (window as any).jQuery(localRef).ripples({
-          resolution: 512,
-          dropRadius: 20,
-          perturbance: 0.04,
-        })
+      try {
+        if (!('jQuery' in window)) {
+          await loadScript('https://code.jquery.com/jquery-3.6.0.min.js')
+        }
+        if (!('ripples' in (window as any).jQuery.fn)) {
+          await loadScript('https://cdn.jsdelivr.net/npm/jquery.ripples@0.6.3/dist/jquery.ripples.min.js')
+        }
+        if (localRef && (window as any).jQuery) {
+          (window as any).jQuery(localRef).ripples({
+            resolution: 512,
+            dropRadius: 20,
+            perturbance: 0.04,
+          })
+        }
+      } catch (error) {
+        // fallback si falla
       }
     }
 
     setupRipples()
 
     return () => {
-      // Clean up the effect when unmounting
-      if (localRef && (window as any).jQuery && (window as any).jQuery.fn.ripples) {
-        (window as any).jQuery(localRef).ripples('destroy')
-      }
+      try {
+        if (
+          localRef &&
+          typeof (window as any).jQuery === 'function' &&
+          (window as any).jQuery.fn &&
+          typeof (window as any).jQuery.fn.ripples === 'function' &&
+          (window as any).jQuery(localRef).data('ripples')
+        ) {
+          (window as any).jQuery(localRef).ripples('destroy')
+        }
+      } catch (e) {}
     }
-  }, [])
+  }, [shouldFallback])
 
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, ease: "easeInOut" }}
-      ref={ref}
-      className="relative w-full h-screen flex items-center justify-center"
-      style={!isFirefox ? {
-        backgroundImage: svgBackground,
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-      } : undefined}
-    >
-      {isFirefox && (
-        <svg 
+  // Fallback para mobile, firefox, IE o sin WebGL
+  if (shouldFallback) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+        className="relative w-full h-[calc(100svh-100px)] -translate-y-[50px] md:translate-y-0 flex items-center justify-center"
+      >
+        <svg
           className="absolute inset-0 w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <text 
+          <text
             className="text-gabarito pointer-events-none select-none"
             x="50%"
             y="50%"
@@ -107,7 +137,24 @@ export default function RippleTitle({ title }: { title: string }) {
             {title}
           </text>
         </svg>
-      )}
-    </motion.div>
+      </motion.div>
+    )
+  }
+
+  // Efecto ripple solo en desktop, chrome, edge, safari con WebGL
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: "easeInOut" }}
+      ref={ref}
+      className="relative w-full h-screen flex items-center justify-center"
+      style={{
+        backgroundImage: svgBackground,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+      }}
+    />
   )
 }

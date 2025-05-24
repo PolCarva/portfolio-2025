@@ -3,7 +3,7 @@ import WaterLink from "./ui/water-link"
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative w-full h-svh md:translate-y-0 flex flex-col items-center justify-center overflow-hidden">
       <RippleTitle title="pablo carvalho" />
       <h1 className="sr-only">
         pablo carvalho | full stack developer & multimedia designer
