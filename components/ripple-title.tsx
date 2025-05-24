@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useScreenSize } from '@/hooks/useScreenSize'
+import { motion } from 'framer-motion'
 
 export default function RippleTitle({ title }: { title: string }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -72,7 +73,10 @@ export default function RippleTitle({ title }: { title: string }) {
   }, [])
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: "easeInOut" }}
       ref={ref}
       className="relative w-full h-screen flex items-center justify-center"
       style={!isFirefox ? {
@@ -104,6 +108,6 @@ export default function RippleTitle({ title }: { title: string }) {
           </text>
         </svg>
       )}
-    </div>
+    </motion.div>
   )
 }

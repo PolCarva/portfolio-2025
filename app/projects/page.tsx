@@ -41,7 +41,7 @@ export default function ProjectsPage() {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             <ArrowRight size={18} />
-            <p className="font-semibold tracking-wider">Selected projects</p>
+            <p className="font-semibold tracking-wider">selected projects</p>
           </motion.div>
 
           <div className="flex flex-col md:flex-row gap-[4em]">
