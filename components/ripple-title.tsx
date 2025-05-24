@@ -33,9 +33,14 @@ export default function RippleTitle({ title }: { title: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const { width: screenSize } = useScreenSize()
   const [svgBackground, setSvgBackground] = useState<string>('')
-
-  // Detectar entorno
+  const [isSizeReady, setIsSizeReady] = useState(false)
   const [shouldFallback, setShouldFallback] = useState(false)
+
+  useEffect(() => {
+    if (screenSize > 0) {
+      setIsSizeReady(true)
+    }
+  }, [screenSize])
 
   useEffect(() => {
     setShouldFallback(
@@ -44,7 +49,8 @@ export default function RippleTitle({ title }: { title: string }) {
   }, [])
 
   useEffect(() => {
-    // Generate SVG text on the client side to avoid hydration mismatch
+    if (!isSizeReady) return
+
     const svgText = encodeURIComponent(`
       <svg width="100svw" height="70svh" xmlns="http://www.w3.org/2000/svg">
         <text class="text-gabarito" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
@@ -54,10 +60,10 @@ export default function RippleTitle({ title }: { title: string }) {
       </svg>
     `)
     setSvgBackground(`url("data:image/svg+xml,${svgText}")`)
-  }, [title, screenSize])
+  }, [title, screenSize, isSizeReady])
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !ref.current || shouldFallback) return
+    if (typeof window === 'undefined' || !ref.current || shouldFallback || !isSizeReady) return
 
     const localRef = ref.current
 
@@ -106,16 +112,15 @@ export default function RippleTitle({ title }: { title: string }) {
         }
       } catch (e) {}
     }
-  }, [shouldFallback])
+  }, [shouldFallback, isSizeReady])
 
-  // Fallback para mobile, firefox, IE o sin WebGL
   if (shouldFallback) {
     return (
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, ease: "easeInOut" }}
-        className="relative w-full h-[calc(100svh-100px)] -translate-y-[50px] md:translate-y-0 flex items-center justify-center"
+        className="relative w-full h-[70vh] flex items-center justify-center"
       >
         <svg
           className="absolute inset-0 w-full h-full"
@@ -141,7 +146,6 @@ export default function RippleTitle({ title }: { title: string }) {
     )
   }
 
-  // Efecto ripple solo en desktop, chrome, edge, safari con WebGL
   return (
     <motion.div
       initial={{ opacity: 0 }}
