@@ -125,7 +125,7 @@ export default function aboutpage() {
             transition={{ delay: 0.1 }}
             className="flex items-center gap-2 md:gap-4 mb-2 md:mb-6 text-base md:text-3xl"
           >
-            <span className="text-lg">🌏 Montevideo, Uruguay</span>
+            <span className="text-lg">montevideo, uruguay</span>
           </motion.div>
 
           {/* menú de secciones en mobile */}
