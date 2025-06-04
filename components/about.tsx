@@ -43,7 +43,7 @@ export default function About() {
           href="/about"
           className="px-8 py-4 overflow-hidden md:px-12 my-10 md:py-6 rounded-full max-w-[calc(100vw-2rem)] md:max-w-md mx-auto md:mx-0 md:ml-auto w-full border text-center border-white duration-1000 hover:text-black transition-colors text-xl font-bold tracking-wider"
         >
-          view my about
+          about me
         </WaterLink>
       </div>
 
